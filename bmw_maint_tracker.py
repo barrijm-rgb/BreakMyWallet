@@ -204,7 +204,6 @@ def import_data(self):
         messagebox.showinfo("Import Complete", "Data imported successfully.")
     except Exception as e:
         messagebox.showerror("Error", str(e))
-```
 
 if **name** == "**main**":
 app = BreakMyWalletApp()
