@@ -12,7 +12,6 @@ jobs:
 build:
 runs-on: windows-latest
 
-```
 steps:
   - name: Checkout code
     uses: actions/checkout@v4
@@ -27,7 +26,9 @@ steps:
     run: |
       python -m pip install --upgrade pip
       pip install pyinstaller
-      if (Test-Path 'requirements.txt') { pip install -r requirements.txt }
+      if (Test-Path -Path 'requirements.txt') {
+        pip install -r requirements.txt
+      }
 
   - name: Build EXE with PyInstaller
     shell: pwsh
@@ -39,4 +40,3 @@ steps:
     with:
       name: BreakMyWallet
       path: dist/BreakMyWallet.exe
-```
