@@ -33,6 +33,7 @@ class BreakMyWalletApp(tk.Tk):
         super().__init__()
         self.title("BreakMyWallet — BMW Maintenance Tracker")
         self.geometry("900x600")
+        os.makedirs(os.path.dirname(DB_FILE) or ".", exist_ok=True)
         self.conn = sqlite3.connect(DB_FILE)
         self.create_tables()
         self.current_vehicle = None
