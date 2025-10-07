@@ -1,0 +1,8 @@
+**pycache**/
+*.pyc
+dist/
+build/
+*.spec
+bmw_maint.db
+.env
+.venv/
