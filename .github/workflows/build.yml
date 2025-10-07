@@ -2,41 +2,40 @@ name: Build Windows EXE
 
 on:
 push:
-branches: [ main ]
+branches:
+- main
 pull_request:
-branches: [ main ]
+branches:
+- main
 release:
-types: [created]
+types:
+- created
 
 jobs:
 build:
 runs-on: windows-latest
-
 steps:
-  - name: Checkout code
-    uses: actions/checkout@v4
+- name: Checkout code
+uses: actions/checkout@v4
 
+```
   - name: Set up Python
     uses: actions/setup-python@v5
     with:
-      python-version: '3.11'
+      python-version: "3.11"
 
   - name: Install dependencies
-    shell: pwsh
     run: |
       python -m pip install --upgrade pip
       pip install pyinstaller
-      if (Test-Path -Path 'requirements.txt') {
-        pip install -r requirements.txt
-      }
+      if exist requirements.txt pip install -r requirements.txt
 
   - name: Build EXE with PyInstaller
-    shell: pwsh
-    run: |
-      pyinstaller --onefile --windowed bmw_maint_tracker.py --name BreakMyWallet
+    run: pyinstaller --onefile --windowed bmw_maint_tracker.py --name BreakMyWallet
 
   - name: Upload EXE as artifact
     uses: actions/upload-artifact@v4
     with:
       name: BreakMyWallet
       path: dist/BreakMyWallet.exe
+```
