@@ -9,12 +9,10 @@ from tkinter import ttk, messagebox, filedialog
 import sqlite3
 import json
 import os
-from PIL import Image, ImageTk
 
 DB_FILE = "bmw_maint.db"
 ASSETS_DIR = os.path.join("assets", "logos")
 
-# Supported vehicles
 VEHICLES = [
     {"name": "2008 BMW M3", "logo": "logo_2008_m3.svg"},
     {"name": "2013 BMW 335i M Sport Sedan", "logo": "logo_2013_335i.svg"},
@@ -22,7 +20,6 @@ VEHICLES = [
     {"name": "2021 BMW X3 sDrive30i", "logo": "logo_2021_x3.svg"},
 ]
 
-# Default maintenance tasks
 DEFAULT_TASKS = [
     {"task": "Oil Change", "interval_miles": 7500, "interval_months": 12},
     {"task": "Brake Fluid", "interval_miles": 30000, "interval_months": 24},
@@ -31,18 +28,13 @@ DEFAULT_TASKS = [
     {"task": "Air Filter", "interval_miles": 15000, "interval_months": 12},
 ]
 
-
 class BreakMyWalletApp(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("BreakMyWallet — BMW Maintenance Tracker")
         self.geometry("900x600")
-        self.icon_path = os.path.join(ASSETS_DIR, "icon.svg")
-
-        # Connect to database
         self.conn = sqlite3.connect(DB_FILE)
         self.create_tables()
-
         self.current_vehicle = None
         self.setup_ui()
 
@@ -78,7 +70,6 @@ class BreakMyWalletApp(tk.Tk):
         sidebar = ttk.Frame(mainframe, width=200)
         sidebar.grid(row=0, column=0, sticky="ns")
         ttk.Label(sidebar, text="Vehicles", font=("Arial", 14, "bold")).pack(pady=(0, 10))
-
         for v in VEHICLES:
             btn = ttk.Button(sidebar, text=v["name"], command=lambda v=v: self.load_vehicle(v))
             btn.pack(fill="x", pady=2)
@@ -127,7 +118,6 @@ class BreakMyWalletApp(tk.Tk):
         if not self.current_vehicle:
             messagebox.showerror("Error", "Please select a vehicle first.")
             return
-
         popup = tk.Toplevel(self)
         popup.title("Add Maintenance Record")
         popup.geometry("400x300")
@@ -160,7 +150,7 @@ class BreakMyWalletApp(tk.Tk):
                 cursor = self.conn.cursor()
                 cursor.execute(
                     "INSERT INTO maintenance (vehicle, task, last_date, last_mileage, notes) VALUES (?, ?, ?, ?, ?)",
-                    (self.current_vehicle["name"], task, date, mileage or None, notes),
+                    (self.current_vehicle["name"], task, date, mileage or None, notes)
                 )
                 self.conn.commit()
                 self.load_vehicle(self.current_vehicle)
@@ -193,7 +183,7 @@ class BreakMyWalletApp(tk.Tk):
             for v, t, d, m, n in data:
                 cursor.execute(
                     "INSERT INTO maintenance (vehicle, task, last_date, last_mileage, notes) VALUES (?, ?, ?, ?, ?)",
-                    (v, t, d, m, n),
+                    (v, t, d, m, n)
                 )
             self.conn.commit()
             if self.current_vehicle:
@@ -201,7 +191,6 @@ class BreakMyWalletApp(tk.Tk):
             messagebox.showinfo("Import Complete", "Data imported successfully.")
         except Exception as e:
             messagebox.showerror("Error", str(e))
-
 
 if __name__ == "__main__":
     app = BreakMyWalletApp()
