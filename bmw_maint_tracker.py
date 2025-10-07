@@ -205,6 +205,6 @@ def import_data(self):
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
-if **name** == "**main**":
+if __name__ == "__main__":
 app = BreakMyWalletApp()
 app.mainloop()
