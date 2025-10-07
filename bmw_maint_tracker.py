@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+/#!/usr/bin/env python3
 """
 BreakMyWallet — BMW Maintenance Tracker
 Standalone Tkinter + SQLite application
@@ -51,7 +51,6 @@ self.create_tables()
 self.current_vehicle = None
 self.setup_ui()
 
-```
 # -----------------------------
 # Database
 # -----------------------------
