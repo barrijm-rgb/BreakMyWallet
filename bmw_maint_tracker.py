@@ -206,5 +206,5 @@ def import_data(self):
         messagebox.showerror("Error", str(e))
 
 if __name__ == "__main__":
-app = BreakMyWalletApp()
-app.mainloop()
+    app = BreakMyWalletApp()
+    app.mainloop()
