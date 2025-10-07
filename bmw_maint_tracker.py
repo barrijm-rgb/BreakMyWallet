@@ -37,7 +37,7 @@ DEFAULT_TASKS = [
 ]
 
 class BreakMyWalletApp(tk.Tk):
-def **init**(self):
+    def __init__(self):
 super().**init**()
 self.title("BreakMyWallet — BMW Maintenance Tracker")
 self.geometry("900x600")
