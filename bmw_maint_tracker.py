@@ -36,9 +36,13 @@ DEFAULT_TASKS = [
 {"task": "Air Filter", "interval_miles": 15000, "interval_months": 12},
 ]
 
-class BreakMyWalletApp(tk.Tk):
+class Vehicle:
     def __init__(self):
-super().**init**()
+        super().__init__()
+        # You can initialize things here
+        self.make = ""
+        self.model = ""
+        self.year = 0
 self.title("BreakMyWallet — BMW Maintenance Tracker")
 self.geometry("900x600")
 self.icon_path = os.path.join(ASSETS_DIR, "icon.svg")
