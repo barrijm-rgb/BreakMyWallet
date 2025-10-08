@@ -9,9 +9,10 @@ from tkinter import ttk, messagebox, filedialog
 import sqlite3
 import json
 import os
-os.makedirs(os.path.dirname(DB_FILE), exist_ok=True)
 
 DB_FILE = os.path.join(os.path.expanduser("~"), "bmw_maint.db")
+os.makedirs(os.path.dirname(DB_FILE), exist_ok=True)
+
 ASSETS_DIR = os.path.join("assets", "logos")
 
 VEHICLES = [
